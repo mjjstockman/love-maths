@@ -37,15 +37,17 @@ function runGame(gameType) {
  * the returned calculateCorrectAnswer array
  */
 function checkAnswer() {
-    
+
     let userAnswer = parseInt(document.getElementById('answer-box').value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
         alert('Well done!');
+        incrementScore();
     } else {
         alert(`Wrong! Answer is ${calculatedAnswer[0]} and you guessed ${userAnswer}`);
+        incrementWrongAnswer();
     }
     runGame(calculatedAnswer[1]);
 }
@@ -67,11 +69,20 @@ function calculateCorrectAnswer() {
     }
 }
 
+/**
+ * Gets the current score from the DOM and increases it by 1
+ */
 function incrementScore() {
-    
+    let oldScore = parseInt(document.getElementById('score').innerText);
+    document.getElementById('score').innerText = ++oldScore;
 }
 
+/**
+ * Gets the current incorrect answers from DOM and increases it by 1
+ */
 function incrementWrongAnswer() {
+    let oldIncorrect = parseInt(document.getElementById('incorrect').innerText);
+    document.getElementById('incorrect').innerText = ++oldIncorrect;
     
 }
 
